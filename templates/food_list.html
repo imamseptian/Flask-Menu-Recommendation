@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+    <title>Datatable</title>
+  </head>
+  <body>
+    
+    <div class="container">
+       <div class="m-100">
+            <a href="/">Go To Home</a>
+           <h3>{{ user_data.name }}</h3>
+       </div>
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All Foood</a>
+                          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Rated Food</a>
+                        </div>
+                      </nav>
+                      <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <h2>Food & Beverage List</h2>
+                            <table id="tabel_food" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Food</th>
+                                        <!-- <th>Food Code</th> -->
+                                        <th>Category</th>
+                                        <th>Type</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in food_data %}
+                                    <tr>
+                                        
+                                        <!-- <td>{{row.name}}</td> -->
+                                        <td><a href="" data-toggle="modal" data-target="#modalrate{{row.id}}">{{row.name}}</a></td>
+                                        <!-- <td>{{row.food_code}}</td> -->
+                                        <td>{{row.category}}</td>
+                                        <td>{{row.type}}</td>
+                                        
+                                    </tr>
+
+                                    <div class="modal fade" id="modalrate{{row.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Rate Food</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                              <form action="{{url_for('giverate')}}" method="POST">
+                                                  <h3>{{row.name}}</h3>
+                                                  <h4>Nutrition per 100g</h4>
+                                                <div class="container">
+                                                  <div class="d-flex row mb-3">
+                                                    <ul class="list-group flex-fill">
+                                                      
+                                                      <li class="list-group-item"><p>Calories <b class="float-right">{{row.calories}} g</b> </p></li>
+                                                      <li class="list-group-item"><p>Protein <b class="float-right">{{row.protein}} g</b> </p></li>
+                                                      <li class="list-group-item"><p>Carbs <b class="float-right">{{row.carbs}} g</b> </p></li>
+                                                      <li class="list-group-item"><p>Fat <b class="float-right">{{row.fat}} g</b> </p></li>
+                                                      <li class="list-group-item"><p>Fiber <b class="float-right">{{row.fiber}} g</b> </p></li>
+                                                      <li class="list-group-item"><p>Sugar <b class="float-right">{{row.sugar}} g</b> </p></li>
+                                                      
+                                                    </ul>
+
+                                                    <ul class="list-group flex-fill">
+                                                      
+                                                      <li class="list-group-item"><p>Vitamin A <b class="float-right">{{row.vitamin_a}} mcg</b> </p></li>
+                                                      <li class="list-group-item"><p>Vitamin B-6 <b class="float-right">{{row.vitamin_b6}} mg</b> </p></li>
+                                                      <li class="list-group-item"><p>Vitamin B-12 <b class="float-right">{{row.vitamin_b12}} mcg</b> </p></li>
+                                                      <li class="list-group-item"><p>Vitamin C <b class="float-right">{{row.vitamin_c}} mg</b> </p></li>
+                                                      <li class="list-group-item"><p>Vitamin D <b class="float-right">{{row.vitamin_d}} mcg</b> </p></li>
+                                                      <li class="list-group-item"><p>Vitamin E <b class="float-right">{{row.vitamin_e}} mg</b> </p></li>
+                                                      
+                                                    </ul>
+
+                                                  </div>
+
+                                                      <div class="row mb-3">
+                                                        <div class="col-sm">
+                                                          Your Rating (1-5),<strong>Other than this will not be recorded</strong> 
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <input type="hidden" name="user_id" value="{{user_data.id}}">
+                                                            <input type="hidden" name="food_id" value="{{row.id}}">
+                                                            <input type="hidden" name="food_code" value="{{row.food_code}}">
+                                                            <input type="number" class="form-control" name="rating">
+                                                        </div>
+                                                      </div>
+
+                                                    
+                                                   
+                                                  </div>
+                                                
+                                                  <button type="submit" class="btn btn-primary">Rate !!!</button>
+                                              </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                
+                                    {% endfor %}
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <h2>Food & Beverage List</h2>
+                            <table id="tabel_rating" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Food</th>
+                                        <!-- <th>Food_code</th> -->
+                                        <th>Category</th>
+                                        <th>Type</th>
+                                        <th>Rating</th>
+                                        <th>Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for rating,food in rating_data %}
+                                    <tr>
+                                        
+                                        <td><a href="" data-toggle="modal" data-target="#modaldetailrate{{rating.id}}">{{food.name}}</a></td>
+                                        <!-- <td>{{food.food_code}}</td> -->
+                                        <td>{{food.category}}</td>
+                                        <td>{{food.type}}</td>
+                                        <td>{{rating.rating}}</td>
+                                        <td>
+                                          <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaldetailrate{{rating.id}}">Edit</a>
+                                          <a href="/deleterating/{{user_data.id}}/{{rating.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete?')">Delete</a>
+                                      </td>
+                                    </tr>
+
+                                    <div class="modal fade" id="modaldetailrate{{rating.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Your Rating</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                              <form action="{{url_for('editrating')}}" method="POST">
+                                                  <h3>{{food.name}}</h3>
+                                                  <h4>Food Nutrition / 100g</h4>
+                                                  
+                                                  <div class="container">
+                                                    <div class="d-flex row mb-3">
+                                                      <ul class="list-group flex-fill">
+                                                        
+                                                        <li class="list-group-item"><p>Calories <b class="float-right">{{food.calories}} g</b> </p></li>
+                                                        <li class="list-group-item"><p>Protein <b class="float-right">{{food.protein}} g</b> </p></li>
+                                                        <li class="list-group-item"><p>Carbs <b class="float-right">{{food.carbs}} g</b> </p></li>
+                                                        <li class="list-group-item"><p>Fat <b class="float-right">{{food.fat}} g</b> </p></li>
+                                                        <li class="list-group-item"><p>Fiber <b class="float-right">{{food.fiber}} g</b> </p></li>
+                                                        <li class="list-group-item"><p>Sugar <b class="float-right">{{food.sugar}} g</b> </p></li>
+                                                        
+                                                      </ul>
+
+                                                      <ul class="list-group flex-fill">
+                                                        
+                                                        <li class="list-group-item"><p>Vitamin A <b class="float-right">{{food.vitamin_a}} mcg</b> </p></li>
+                                                        <li class="list-group-item"><p>Vitamin B-6 <b class="float-right">{{food.vitamin_b6}} mg</b> </p></li>
+                                                        <li class="list-group-item"><p>Vitamin B-12 <b class="float-right">{{food.vitamin_b12}} mcg</b> </p></li>
+                                                        <li class="list-group-item"><p>Vitamin C <b class="float-right">{{food.vitamin_c}} mg</b> </p></li>
+                                                        <li class="list-group-item"><p>Vitamin D <b class="float-right">{{food.vitamin_d}} mcg</b> </p></li>
+                                                        <li class="list-group-item"><p>Vitamin E <b class="float-right">{{food.vitamin_e}} mg</b> </p></li>
+                                                        
+                                                      </ul>
+
+                                                    </div>
+                                                    <!-- <div class="flex row mb-3">
+                                                      <ul class="list-group">
+                                                        
+                                                        <li class="list-group-item"><p>Carbs <b class="float-right">20g</b> </p></li>
+                                                        <li class="list-group-item"><p>Carbs <b class="float-right">20g</b> </p></li>
+                                                        <li class="list-group-item"><p>Carbs <b class="float-right">20g</b> </p></li>
+                                                        <li class="list-group-item"><p>Carbs <b class="float-right">20g</b> </p></li>
+                                                        <li class="list-group-item"><p>Carbs <b class="float-right">20g</b> </p></li>
+                                                        <li class="list-group-item"><p>Carbs <b class="float-right">20g</b> </p></li>
+                                                        
+                                                      </ul>
+                                                      <ul class="list-group">
+                                                        <li class="list-group-item">Cras justo odio</li>
+                                                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                                                        <li class="list-group-item">Morbi leo risus</li>
+                                                        <li class="list-group-item">Porta ac consectetur ac</li>
+                                                        <li class="list-group-item">Vestibulum at eros</li>
+                                                      </ul>
+                                                    </div> -->
+                                                    
+                                                      
+
+                                                      <div class="row mb-3">
+                                                        <div class="col-sm">
+                                                          Your Rating (1-5),<strong>Other than this will not be recorded</strong>
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            <input type="hidden" name="id" value="{{rating.id}}">
+                                                            <input type="hidden" name="user_id" value="{{rating.user_id}}">
+                                                            <input type="hidden" name="food_id" value="{{rating.food_id}}">
+                                                            <input type="hidden" name="food_code" value="{{rating.food_id}}">
+                                                            <input type="number" class="form-control" name="rating" value={{rating.rating}}>
+                                                        </div>
+                                                      </div>
+
+                                                    
+                                                   
+                                                  </div>
+                                                  
+                                                  <button type="submit" class="btn btn-primary">Edit Rating</button>
+                                              </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    
+                                
+                                    {% endfor %}
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        
+                      </div>
+                </div>
+    
+               
+    
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tabel_food').DataTable();
+        } );
+
+        $(document).ready(function() {
+            $('#tabel_rating').DataTable();
+        } );
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

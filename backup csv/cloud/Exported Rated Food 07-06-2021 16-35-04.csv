@@ -1,0 +1,141 @@
+food_id,food_code,name,category,type,calories,protein,carbs,fat,fiber,sugar,vitamin_a,vitamin_b6,vitamin_b12,vitamin_c,vitamin_d,vitamin_e
+8,11432000,"Yogurt, low fat milk, fruit",Yogurt,Food,89.0,4.66,14.46,1.37,0.1,12.01,12.0,0.046,0.49,1.8,1.2,0.04
+13,11435100,"Yogurt, Greek, with oats",Yogurt,Food,160.0,8.9,22.38,4.29,1.9,12.07,88.0,0.077,0.53,0.1,0.7,0.24
+15,11446000,"Yogurt parfait, low fat, with fruit",Yogurt,Food,84.0,3.36,15.86,1.01,1.1,11.68,30.0,0.233,0.88,14.3,1.2,0.25
+16,14710200,"Beer cheese soup, made with milk",Soups,Food,192.0,6.19,6.52,15.43,0.3,0.8,182.0,0.037,0.26,0.3,0.3,0.45
+23,26109133,"Cod, coated, baked or broiled, no added fat",Fish,Food,137.0,17.32,13.1,1.16,0.6,1.15,9.0,0.121,1.81,0.0,0.6,0.54
+25,26109143,"Cod, coated, fried, no added fat",Fish,Food,148.0,18.87,11.6,2.31,0.7,1.03,19.0,0.141,1.93,0.0,0.7,0.67
+39,26127123,"Perch, baked or broiled, no added fat",Fish,Food,115.0,24.42,0.1,1.16,0.0,0.04,10.0,0.137,2.15,2.2,3.8,0.25
+45,26137123,"Salmon, baked or broiled, no added fat",Fish,Food,160.0,25.82,0.1,5.54,0.0,0.04,40.0,0.693,4.7,0.5,13.7,0.51
+52,26153122,"Tuna, fresh, baked or broiled, no added fat",Fish,Food,138.0,30.73,0.1,0.62,0.0,0.04,20.0,1.058,2.36,0.5,2.1,0.3
+55,26205160,"Octopus, steamed",Shellfish,Food,163.0,29.62,4.37,2.07,0.0,0.0,89.0,0.644,35.76,7.9,0.0,1.19
+62,26303160,"Clams, steamed or boiled",Shellfish,Food,171.0,29.21,7.11,1.91,0.0,0.0,161.0,0.018,20.22,0.0,0.0,1.35
+73,26315190,"Oysters, smoked",Shellfish,Food,82.0,9.2,4.38,2.76,0.0,1.0,20.0,0.047,14.1,0.0,0.0,1.37
+77,26319121,"Shrimp, baked or broiled, made with butter",Shellfish,Food,111.0,16.26,1.18,4.19,0.0,0.04,80.0,0.183,1.26,0.5,0.1,1.66
+89,27150010,"Fish with cream or white sauce, not tuna or lobster",Seafood mixed dishes,Food,115.0,17.04,2.74,3.57,0.0,1.38,50.0,0.249,0.86,0.7,1.2,0.85
+93,27150410,Shrimp teriyaki,Stir-fry and soy-based sauce mixtures,Food,120.0,21.62,3.34,1.56,0.0,1.76,82.0,0.234,1.52,0.0,0.1,2.02
+94,27151070,"Stewed codfish, no potatoes, Puerto Rican style",Seafood mixed dishes,Food,105.0,12.05,4.27,4.42,1.1,2.05,10.0,0.161,1.14,18.4,0.4,1.46
+95,27213010,Biryani with meat,Rice mixed dishes,Food,145.0,8.5,12.2,6.77,1.0,1.69,16.0,0.136,0.47,5.6,0.1,0.25
+96,27243100,Biryani with chicken,Rice mixed dishes,Food,103.0,7.15,13.57,2.36,1.1,1.87,19.0,0.177,0.12,6.3,0.1,0.32
+97,27250020,"Clams, stuffed",Seafood mixed dishes,Food,200.0,11.87,12.94,11.08,0.9,1.57,154.0,0.054,6.78,1.4,0.5,1.57
+98,27250030,Codfish ball or cake,Seafood mixed dishes,Food,191.0,14.32,10.57,9.85,1.2,1.01,46.0,0.206,0.67,0.5,0.8,1.36
+101,27250160,Tuna cake or patty,Seafood mixed dishes,Food,209.0,15.34,2.63,14.88,0.2,0.51,28.0,0.232,1.75,0.3,1.1,1.28
+109,27350070,Tuna pot pie,Seafood mixed dishes,Food,221.0,8.96,16.5,13.16,1.3,1.64,152.0,0.06,0.47,1.4,1.7,1.0
+111,27350410,Tuna noodle casserole with vegetables and mushroom sauce,Seafood mixed dishes,Food,124.0,7.97,12.97,4.43,1.0,1.47,29.0,0.134,0.78,2.7,0.5,0.33
+115,27363100,Jambalaya with meat and rice,Rice mixed dishes,Food,162.0,13.77,8.64,7.97,0.7,0.94,8.0,0.23,0.32,6.4,0.2,0.68
+117,27415140,Hunan beef,Stir-fry and soy-based sauce mixtures,Food,105.0,7.08,7.29,5.3,1.5,2.41,63.0,0.161,0.48,11.6,0.1,0.82
+118,27416400,Stir fried beef and vegetables in soy sauce,Stir-fry and soy-based sauce mixtures,Food,93.0,10.85,4.25,3.68,0.9,2.6,23.0,0.251,0.46,3.2,0.3,0.37
+120,27445220,Kung pao chicken,Stir-fry and soy-based sauce mixtures,Food,129.0,9.76,6.87,6.98,1.5,3.03,65.0,0.243,0.11,7.1,0.0,1.02
+121,27450010,Crab salad,Seafood mixed dishes,Food,187.0,9.44,1.19,15.89,0.4,0.57,9.0,0.1,1.71,4.6,0.0,1.68
+122,27450020,Lobster salad,Seafood mixed dishes,Food,186.0,10.33,1.15,15.4,0.4,0.55,8.0,0.083,0.77,2.8,0.0,1.25
+123,27450030,Salmon salad,Seafood mixed dishes,Food,212.0,10.86,2.66,17.36,0.4,1.98,20.0,0.178,2.37,0.7,7.4,1.07
+133,27450070,Shrimp salad,Seafood mixed dishes,Food,198.0,10.47,1.22,16.6,0.4,0.58,8.0,0.027,0.39,5.1,0.0,1.31
+134,27450080,Seafood salad,Seafood mixed dishes,Food,190.0,10.08,1.18,15.95,0.4,0.56,9.0,0.07,0.96,4.2,0.0,1.41
+136,27450100,Tuna salad with egg,Seafood mixed dishes,Food,192.0,10.33,2.67,15.4,0.4,1.99,31.0,0.178,1.32,0.7,0.8,0.94
+141,27451070,"Codfish salad, Puerto Rican style, Serenata",Seafood mixed dishes,Food,180.0,6.61,2.81,15.94,0.7,1.51,17.0,0.12,0.28,5.6,0.3,2.67
+146,27550420,"Fish sandwich, grilled",Sandwiches,Food,172.0,15.98,21.26,1.98,0.8,3.1,11.0,0.211,1.28,0.9,0.4,0.44
+147,27550720,"Tuna salad sandwich, on bread",Sandwiches,Food,220.0,9.89,18.28,11.76,1.0,3.16,14.0,0.153,0.9,0.5,0.4,0.7
+149,27550800,Seafood salad sandwich,Sandwiches,Food,217.0,9.86,17.19,11.83,1.0,2.16,6.0,0.077,0.64,2.8,0.0,1.01
+151,28310110,"Beef, broth, bouillon, or consomme",Soups,Food,7.0,1.14,0.04,0.22,0.0,0.0,0.0,0.01,0.07,0.0,0.0,0.0
+154,28311010,Pepperpot soup,Soups,Food,48.0,3.48,3.1,2.49,0.3,0.79,17.0,0.077,0.14,4.4,0.0,0.1
+156,28340110,"Chicken or turkey broth, bouillon, or consomme",Soups,Food,6.0,0.64,0.44,0.21,0.0,0.43,0.0,0.0,0.02,0.0,0.0,0.04
+158,28340610,"Chicken or turkey vegetable soup, stew type",Soups,Food,71.0,5.06,6.88,2.64,0.6,0.87,27.0,0.02,0.1,0.5,0.0,0.13
+161,28350050,Fish chowder,Soups,Food,112.0,8.07,6.1,6.21,0.8,0.92,62.0,0.148,0.94,5.2,0.4,0.41
+166,28355310,Oyster stew,Soups,Food,79.0,4.25,4.24,5.08,0.0,3.52,70.0,0.046,3.01,0.0,0.7,0.4
+170,32103030,"Egg salad, made with creamy dressing",Eggs and omelets,Food,212.0,10.17,2.12,17.68,0.0,1.86,120.0,0.101,0.91,0.0,1.8,1.27
+171,32103035,"Egg salad, made with light creamy dressing",Eggs and omelets,Food,155.0,10.17,2.37,11.29,0.0,2.08,119.0,0.101,0.88,0.1,1.7,1.33
+176,32105210,Chicken egg foo yung,Stir-fry and soy-based sauce mixtures,Food,136.0,12.86,4.68,7.18,0.3,3.13,77.0,0.145,0.42,1.7,0.9,0.78
+177,32105230,Shrimp egg foo yung,Stir-fry and soy-based sauce mixtures,Food,124.0,11.76,5.09,5.97,0.3,3.14,98.0,0.143,0.76,1.7,0.9,1.25
+178,32105240,Beef egg foo yung,Stir-fry and soy-based sauce mixtures,Food,146.0,13.89,4.68,7.88,0.3,3.13,74.0,0.186,0.78,1.7,0.9,0.79
+181,41203030,Black bean salad,Bean,Food,94.0,3.08,12.61,3.85,3.4,3.53,7.0,0.065,0.0,4.4,0.0,0.71
+182,41221020,"Chili with beans, without meat",Bean,Food,42.0,2.39,8.19,0.33,2.7,2.59,17.0,0.096,0.0,6.4,0.0,0.63
+183,41311020,"Sambar, vegetable stew",Vegetable dishes,Food,85.0,4.32,11.8,2.71,4.0,2.08,7.0,0.111,0.0,3.2,0.0,0.46
+184,41311030,Lentil curry,Bean,Food,110.0,3.67,12.28,5.61,3.4,3.24,36.0,0.13,0.01,7.4,0.0,1.09
+185,41311040,Lentil curry with rice,Bean,Food,117.0,3.27,18.57,3.48,2.2,1.97,22.0,0.115,0.01,4.4,0.0,0.67
+189,41812400,Vegetarian pot pie,Bean,Food,224.0,7.69,17.13,13.98,2.2,1.7,140.0,0.179,0.46,4.1,0.1,1.37
+190,41812450,"Vegetarian chili, made with meat substitute",Bean,Food,107.0,7.44,13.89,2.93,4.4,2.55,19.0,0.309,0.41,4.9,0.0,1.41
+193,42401100,"Yogurt, coconut milk",Yogurt,Food,64.0,0.31,7.95,3.5,0.0,7.4,57.0,0.003,0.57,0.0,0.9,0.01
+197,58150100,"Bibimbap, Korean",Rice mixed dishes,Food,80.0,5.47,8.61,2.88,1.1,1.59,141.0,0.175,0.37,10.1,0.0,0.51
+198,58150520,"Dukboki or Tteokbokki, Korean",Rice mixed dishes,Food,132.0,3.92,19.91,4.07,1.0,1.59,25.0,0.121,0.22,4.7,0.0,1.7
+199,58151170,"Sushi roll, avocado","Egg rolls, dumplings, sushi",Food,92.0,1.81,17.71,1.47,1.4,1.21,5.0,0.048,0.0,1.7,0.0,0.23
+201,58151190,"Sushi roll, eel","Egg rolls, dumplings, sushi",Food,127.0,7.1,15.3,3.71,0.7,0.92,275.0,0.036,0.78,0.9,7.2,1.27
+202,58151200,"Sushi roll, salmon","Egg rolls, dumplings, sushi",Food,103.0,6.88,15.3,1.28,0.7,0.92,15.0,0.198,1.14,0.5,3.4,0.24
+203,58151210,"Sushi roll, shrimp","Egg rolls, dumplings, sushi",Food,100.0,7.01,15.67,0.55,0.7,0.92,25.0,0.079,0.4,0.5,0.0,0.58
+204,58151220,Sushi roll tuna,"Egg rolls, dumplings, sushi",Food,97.0,7.4,15.3,0.26,0.7,0.92,8.0,0.247,0.51,0.5,0.4,0.1
+205,58151230,"Sushi roll, vegetable","Egg rolls, dumplings, sushi",Food,92.0,1.81,17.71,1.47,1.4,1.21,5.0,0.048,0.0,1.7,0.0,0.23
+212,58156110,"Fried rice, Puerto Rican style",Rice mixed dishes,Food,119.0,12.78,8.53,3.33,0.6,0.87,28.0,0.235,0.5,11.4,0.4,0.52
+214,58160000,Biryani with vegetables,Rice mixed dishes,Food,108.0,1.93,17.88,3.16,1.2,1.16,61.0,0.071,0.01,4.1,0.0,0.2
+218,58162310,Rice pilaf,Rice mixed dishes,Food,136.0,3.29,24.08,3.03,0.4,0.48,1.0,0.12,0.01,1.0,0.0,0.32
+219,58163130,Dirty rice,Rice mixed dishes,Food,112.0,5.13,17.28,2.25,0.6,0.87,208.0,0.105,1.07,4.9,0.0,0.29
+224,58163420,"Spanish rice, no added fat",Rice mixed dishes,Food,101.0,2.92,19.92,1.01,1.2,1.57,10.0,0.107,0.03,10.0,0.0,0.29
+228,58164210,Rice dessert or salad with fruit,Rice mixed dishes,Food,151.0,1.6,20.67,7.3,0.8,10.7,83.0,0.082,0.03,21.6,0.3,0.2
+237,58200250,"Wrap sandwich, filled with vegetables",Sandwiches,Food,123.0,3.2,13.96,6.35,1.7,3.05,132.0,0.098,0.03,16.6,0.0,0.33
+238,58404500,Matzo ball soup,Soups,Food,60.0,2.61,7.74,2.05,0.5,0.91,47.0,0.037,0.09,1.8,0.2,0.27
+251,71601040,"Potato salad with egg, made with Italian dressing",Potatoes,Food,113.0,2.81,15.8,4.42,1.3,2.41,19.0,0.212,0.14,5.3,0.3,0.46
+263,71704000,Stewed potatoes with tomatoes,Potatoes,Food,94.0,1.61,15.4,3.17,1.4,2.31,13.0,0.221,0.0,12.7,0.0,0.56
+264,71801100,Potato and cheese soup,Soups,Food,74.0,2.74,8.54,3.36,1.0,1.54,56.0,0.118,0.1,5.9,0.3,0.24
+265,71803010,Potato chowder,Soups,Food,90.0,3.92,8.59,4.57,0.6,4.13,51.0,0.12,0.36,3.6,0.8,0.08
+267,72125260,Spinach and cheese casserole,Vegetable dishes,Food,129.0,7.02,9.91,7.44,2.8,1.05,426.0,0.109,0.19,1.1,0.4,2.45
+269,72125500,Channa Saag,Vegetable dishes,Food,85.0,4.07,9.54,4.17,3.4,1.81,336.0,0.188,0.0,15.0,0.0,2.08
+270,72202010,Broccoli casserole with noodles,Vegetable dishes,Food,109.0,3.72,16.02,3.79,2.0,1.49,45.0,0.106,0.05,41.1,0.1,0.55
+271,72202020,Broccoli casserole with rice,Vegetable dishes,Food,106.0,4.13,15.09,3.5,1.9,1.22,49.0,0.101,0.05,19.8,0.2,0.79
+273,72307000,Spinach soup,Soups,Food,30.0,2.92,2.88,0.98,0.8,1.68,177.0,0.086,0.17,7.7,0.3,0.74
+277,75146000,"Greek Salad, no dressing",Vegetable dishes,Food,42.0,2.62,3.84,2.14,1.6,1.34,239.0,0.092,0.11,5.5,0.1,0.41
+278,75147000,"Spinach salad, no dressing",Vegetable dishes,Food,81.0,7.02,2.97,4.91,1.6,0.54,370.0,0.202,0.31,20.2,0.5,1.71
+279,75148010,"Cobb salad, no dressing",Vegetable dishes,Food,92.0,11.36,2.48,4.34,1.2,1.08,57.0,0.188,0.2,8.9,0.2,0.66
+281,75403020,Green bean casserole,Vegetable dishes,Food,50.0,1.88,6.8,2.16,1.8,2.55,26.0,0.081,0.04,5.8,0.2,0.4
+282,75403200,"Green beans, cooked, Szechuan-style",Stir-fry and soy-based sauce mixtures,Food,97.0,2.41,8.15,6.92,2.7,3.06,34.0,0.174,0.0,10.9,0.0,1.19
+286,75418020,"Squash, summer, casserole with tomato and cheese",Vegetable dishes,Food,84.0,3.46,8.91,4.19,1.4,3.35,44.0,0.125,0.08,13.8,0.2,0.44
+287,75418030,"Squash, summer, casserole, with rice and tomato sauce",Vegetable dishes,Food,83.0,2.32,14.9,1.65,1.1,2.39,17.0,0.118,0.02,10.4,0.0,0.3
+289,75418060,"Squash, summer, souffle",Vegetable dishes,Food,122.0,4.66,6.8,8.7,0.7,3.16,105.0,0.112,0.25,6.6,0.7,0.46
+291,75439500,"Chow mein or chop suey, meatless, no noodles",Stir-fry and soy-based sauce mixtures,Food,43.0,1.34,5.74,1.68,1.2,2.63,13.0,0.086,0.0,7.2,0.0,0.5
+293,75440610,Vegetable curry with rice,Vegetable dishes,Food,102.0,2.02,16.43,3.25,1.3,1.96,39.0,0.118,0.01,7.0,0.0,0.67
+296,75608100,"Onion soup, French",Soups,Food,153.0,7.16,16.24,6.76,1.0,2.58,40.0,0.087,0.1,1.5,0.1,0.32
+301,75657000,"Vegetable broth, bouillon",Soups,Food,5.0,0.24,0.93,0.07,0.0,0.55,12.0,0.007,0.0,0.4,0.0,0.0
+302,11111160,"Milk, calcium fortified, low fat (1%)",Milk,Beverage,43.0,3.38,5.19,0.95,0.0,4.96,58.0,0.06,0.61,0.0,1.1,0.02
+319,11320000,Soy milk,Milk substitutes,Beverage,43.0,2.6,4.92,1.47,0.2,3.65,55.0,0.031,0.85,0.0,1.1,0.11
+321,11320200,"Soy milk, nonfat",Milk substitutes,Beverage,28.0,2.47,4.14,0.04,0.2,3.65,61.0,0.024,0.23,0.0,1.0,0.08
+324,11321200,"Soy milk, nonfat, chocolate",Milk substitutes,Beverage,47.0,2.1,8.24,0.64,0.7,7.13,61.0,0.037,1.0,0.0,1.2,0.13
+325,11350000,"Almond milk, sweetened",Milk substitutes,Beverage,30.0,0.38,5.24,0.93,0.2,4.77,86.0,0.0,0.0,0.0,1.0,2.7
+326,11350010,"Almond milk, sweetened, chocolate",Milk substitutes,Beverage,41.0,0.43,8.34,0.95,0.3,7.72,83.0,0.0,0.0,0.0,0.9,2.61
+327,11350020,"Almond milk, unsweetened",Milk substitutes,Beverage,15.0,0.4,1.31,0.96,0.2,0.81,90.0,0.0,0.0,0.0,1.0,2.81
+328,11350030,"Almond milk, unsweetened, chocolate",Milk substitutes,Beverage,16.0,0.46,1.48,1.0,0.3,0.81,90.0,0.0,0.0,0.0,1.0,2.8
+330,11370000,Coconut milk,Milk substitutes,Beverage,31.0,0.21,2.92,2.08,0.0,2.5,63.0,0.0,0.63,0.0,1.0,0.0
+332,11511300,"Chocolate milk, ready to drink, fat free",Milk,Beverage,67.0,3.39,13.46,0.0,0.0,8.39,64.0,0.024,0.32,1.0,1.1,0.04
+333,11511400,"Chocolate milk, ready to drink, low fat",Milk,Beverage,64.0,3.46,10.15,1.11,0.1,9.94,52.0,0.047,0.23,0.4,1.1,0.0
+341,11513370,"Chocolate milk, made from reduced sugar mix with fat free milk",Milk,Beverage,48.0,3.67,7.63,0.27,0.4,6.01,61.0,0.134,0.56,2.4,1.1,0.0
+354,11513854,"Chocolate milk, made from sugar free syrup with fat free milk",Milk,Beverage,35.0,3.36,6.06,0.32,0.4,4.45,56.0,0.053,0.51,0.0,1.0,0.0
+358,11519205,"Strawberry milk, fat free",Milk,Beverage,61.0,3.18,12.03,0.09,0.0,11.9,59.0,0.054,0.54,0.0,1.0,0.0
+365,42403010,"Coconut water, unsweetened",Fruit drinks,Beverage,18.0,0.22,4.24,0.0,0.0,3.92,0.0,0.0,0.0,9.9,0.0,0.0
+366,42404010,"Coconut water, sweetened",Fruit drinks,Beverage,37.0,0.21,9.07,0.02,0.0,8.78,0.0,0.0,0.0,9.4,0.0,0.0
+370,61210010,"Orange juice, 100%,  freshly squeezed",Fruit drinks,Beverage,45.0,0.7,10.4,0.2,0.2,8.4,10.0,0.04,0.0,50.0,0.0,0.04
+372,61210250,"Orange juice, 100%, with calcium added, canned, bottled or in a carton",Fruit drinks,Beverage,47.0,0.68,11.27,0.12,0.3,8.31,2.0,0.076,0.0,33.6,0.6,0.2
+378,64100220,"Cranberry juice blend, 100% juice, with calcium added",Fruit drinks,Beverage,45.0,0.27,10.91,0.12,0.1,9.8,1.0,0.018,0.0,31.5,0.0,0.01
+379,64101010,Apple cider,Fruit drinks,Beverage,46.0,0.1,11.3,0.13,0.2,9.62,0.0,0.018,0.0,0.9,0.0,0.01
+380,64104010,"Apple juice, 100%",Fruit drinks,Beverage,46.0,0.1,11.3,0.13,0.2,9.62,0.0,0.018,0.0,10.3,0.0,0.01
+381,64104030,"Apple juice, 100%, with calcium added",Fruit drinks,Beverage,48.0,0.12,11.49,0.17,0.3,9.47,0.0,0.018,0.0,30.3,0.0,0.01
+382,64104600,"Blackberry juice, 100%",Fruit drinks,Beverage,38.0,0.3,7.8,0.6,0.1,7.7,6.0,0.021,0.0,11.3,0.0,0.9
+385,64124020,"Pineapple juice, 100%",Fruit drinks,Beverage,53.0,0.36,12.87,0.12,0.2,9.98,0.0,0.1,0.0,43.8,0.0,0.02
+387,64132500,"Strawberry juice, 100%",Fruit drinks,Beverage,38.0,0.3,7.8,0.6,0.1,7.7,6.0,0.021,0.0,11.3,0.0,0.9
+388,64133100,"Watermelon juice, 100%",Fruit drinks,Beverage,30.0,0.61,7.55,0.15,0.4,6.2,28.0,0.045,0.0,8.1,0.0,0.05
+393,64134100,"Fruit smoothie, light",Smoothies drinks,Beverage,52.0,2.65,9.69,0.62,1.1,7.01,22.0,0.091,0.31,8.5,0.3,0.15
+395,64201010,Apricot nectar,Fruit drinks,Beverage,56.0,0.17,13.63,0.45,0.1,12.79,16.0,0.037,0.0,29.7,0.0,0.41
+399,73105000,Beet juice,Fruit drinks,Beverage,25.0,0.72,5.91,0.06,1.1,4.84,1.0,0.05,0.0,2.5,0.0,0.03
+400,73105010,"Carrot juice, 100%",Fruit drinks,Beverage,40.0,0.95,9.28,0.15,0.8,3.91,956.0,0.217,0.0,8.5,0.0,1.16
+403,75132000,Mixed vegetable juice,Fruit drinks,Beverage,27.0,0.82,6.12,0.16,1.2,2.62,489.0,0.146,0.0,5.8,0.0,0.72
+405,75200700,Aloe vera juice drink,Fruit drinks,Beverage,15.0,0.0,3.75,0.0,0.0,3.75,0.0,0.0,0.0,3.8,0.0,0.0
+409,78101118,"Fruit and vegetable smoothie, non-dairy, added protein",Smoothies drinks,Beverage,79.0,7.18,12.48,0.53,1.6,6.92,85.0,0.224,0.24,15.4,0.3,0.71
+416,92510955,"Lemonade, fruit juice drink",Fruit drinks,Beverage,46.0,0.0,12.08,0.0,0.0,11.67,0.0,0.004,0.0,3.1,0.0,0.0
+428,92550040,"Fruit juice drink, diet",Fruit drinks,Beverage,1.0,0.0,0.47,0.0,0.0,0.0,0.0,0.0,0.0,3.0,0.0,0.0
+432,92550360,"Apple juice beverage, 40-50% juice, light",Fruit drinks,Beverage,22.0,0.0,5.1,0.1,0.0,4.8,0.0,0.018,0.0,24.0,0.0,0.01
+433,92550370,"Lemonade, fruit juice drink, light",Fruit drinks,Beverage,21.0,0.0,5.0,0.0,0.0,5.0,0.0,0.004,0.0,25.0,0.0,0.56
+435,92550400,"Vegetable and fruit juice drink, with high vitamin C, diet",Diet drinks,Beverage,4.0,0.0,1.1,0.0,0.0,0.63,105.0,0.004,0.0,25.1,0.0,1.13
+443,92582100,"Fruit juice drink, with high vitamin C, plus added calcium",Fruit drinks,Beverage,45.0,0.0,12.5,0.0,0.0,12.5,0.0,0.0,0.0,30.0,0.0,0.0
+448,92611100,Oatmeal beverage with milk,Grain drinks,Beverage,81.0,1.74,15.49,1.59,0.2,13.97,14.0,0.027,0.22,0.0,0.5,0.03
+449,92613010,Cornmeal beverage,Grain drinks,Beverage,83.0,1.7,16.3,1.54,0.2,13.87,14.0,0.039,0.22,0.0,0.5,0.03
+450,92613510,Cornmeal beverage with chocolate milk,Grain drinks,Beverage,108.0,1.94,20.88,2.4,0.4,17.95,14.0,0.041,0.19,0.0,0.5,0.04
+458,94220215,"Water, bottled, flavored, sugar free (Glaceau Vitamin Water)",Enhanced water,Beverage,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.338,1.02,10.2,0.0,0.0
+467,95106000,"Nutritional drink or shake, ready-to-drink (Muscle Milk)",Nutritional beverages,Beverage,52.0,5.87,2.28,2.17,0.2,0.78,88.0,0.224,0.69,27.6,0.7,0.83
+471,95110020,"Nutritional drink or shake, high protein, ready-to-drink (Slim Fast)",Nutritional beverages,Beverage,61.0,6.59,0.85,3.38,0.4,0.6,171.0,0.208,0.6,19.4,1.1,4.58
+473,95312400,"Energy drink, low calorie (Monster)",Diet drinks,Beverage,5.0,0.0,1.38,0.0,0.0,1.38,0.0,0.833,2.5,0.0,0.0,0.0
+474,95312410,"Energy drink, sugar free (Monster)",Diet drinks,Beverage,5.0,0.0,1.38,0.0,0.0,1.38,0.0,0.833,2.5,0.0,0.0,0.0
