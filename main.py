@@ -215,8 +215,8 @@ def givetfrecommendation(id):
 
         arr_json = []
         content = {}
-        # shuffled_top10 = random.sample(food_data, len(food_data))
-        shuffled_top10 = food_data
+        shuffled_top10 = random.sample(food_data, len(food_data))
+        # shuffled_top10 = food_data
         for food in shuffled_top10:
 
             # content = {'id':foods.id,'bruh':22}
