@@ -13,7 +13,6 @@ from datetime import datetime
 from sklearn.preprocessing import LabelEncoder
 import tensorflow as tf
 from tensorflow.keras import Model
-# from tensorflow.keras.layers import Input, Embedding, Reshape, Dot, Flatten, concatenate, Dense, Dropout
 from tensorflow.keras.layers import Input, Embedding, Reshape, Dot, Flatten, concatenate, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
@@ -24,18 +23,10 @@ from sklearn.neighbors import NearestNeighbors
 import pickle
 import os
 
-
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-# Google Cloud SQL (change this accordingly)
-# USERNAME = "imamseptian"
-# PASSWORD = "imamseptian1234"
-# PUBLIC_IP_ADDRESS = "34.126.174.105"
-# DBNAME = "rating_db"
-# PROJECT_ID = "groovy-analyst-314808"
-# INSTANCE_NAME = "groovy-analyst-314808:asia-southeast1:collectrating"
-
+# API CONFIGURATION
 USERNAME = "imamseptian"
 PASSWORD = "imamseptian1234"
 PUBLIC_IP_ADDRESS = "34.101.251.173"
@@ -43,8 +34,6 @@ DBNAME = "rating_db"
 PROJECT_ID = "groovy-analyst-314808"
 INSTANCE_NAME = "groovy-analyst-314808:asia-southeast2:ayohealthy"
 
-
-# configuration
 app.config["SECRET_KEY"] = "xxxxxxx"
 app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{PUBLIC_IP_ADDRESS}/{DBNAME}"
 
@@ -52,6 +41,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{USERNAME}:{PASSWORD}@
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
+
+# FOOD PHOTOS DIRECTORY
 PHOTOS_FOLDER = os.path.join('static', 'photos')
 app.config['UPLOAD_FOLDER'] = PHOTOS_FOLDER
 
@@ -131,16 +122,18 @@ class Food_images(db.Model):
         self.food_code = food_code
         self.image = image
 
+# Load DF to API
 
-food_name_dict = {}
-# predicted_df = pd.read_csv('TF Recommendation Index.csv')
-predicted_df = pd.read_csv('RecommendationCSV/TF Recommendation Index 07-06-2021 13-25-36.csv')
-# food_df = pd.read_csv('Rated Food.csv')
-food_df = pd.read_csv('ExportedDB/Exported Rated Food 07-06-2021 12-46-47.csv')
+predicted_df = pd.read_csv('RecommendationCSV/TF Recommendation Index 07-06-2021 13-25-36.csv') # DF that every food rating already predicted by TF model
 predicted_df.rename(columns={'Unnamed: 0': 'user_id'}, inplace=True)
 predicted_df = predicted_df.set_index('user_id')
+
+food_df = pd.read_csv('ExportedDB/Exported Rated Food 07-06-2021 12-46-47.csv') # Food with nutrition data
+
 all_code = list(food_df['food_code'].values)
 
+# dict for every food_code to food name
+food_name_dict = {}
 for index, row in food_df.iterrows():
     if(row['food_code'] not in food_name_dict):
         food_name_dict[row['food_code']] = row['name']
@@ -149,27 +142,29 @@ knn_df = food_df.copy()
 knn_df.drop(['food_id', 'food_code', 'name',
              'category', 'type'], axis=1, inplace=True)
 
+# scale food_df
 min_max_scaler = MinMaxScaler()
-# knn_df=df
 knn_df = min_max_scaler.fit_transform(knn_df)
+
+# load KNN model
 model = pickle.load(open('TrainedModel/Food KNN 07-06-2021 18-18-27.pkl', 'rb'))
 distances, indices = model.kneighbors(knn_df)
 
-
+# BASE URL VIEW , Not really used on this API
 @app.route('/')
 def Index():
-    # return "Hellow Flask Application"
-    # all_data = Users.query.all()
     sql = sqlalchemy.text(
         'SELECT users.id,users.name,users.username, SUM(IF(ratings.id IS NULL, 0, 1)) AS rating_count FROM users LEFT JOIN ratings ON ratings.user_id = users.id GROUP BY 1')
     all_data = db.engine.execute(sql)
 
     return render_template("index.html", user_data=all_data)
 
-
+# Recommendation based on DF that already predicted by TF model
+# <id> ==> user_id (make sure user_id registered on DB)
 @app.route('/recommendation/<id>')
 def givetfrecommendation(id):
     current_user = Users.query.filter(Users.id == id).all()
+    #check if user exist
     if(current_user):
         selected_user = current_user[0]
         user_json = {
@@ -179,6 +174,7 @@ def givetfrecommendation(id):
             "email": selected_user.email
         }
 
+        # find user data in predicted_df
         food_code_arr = []
         name_arr = []
         prediction_arr = []
@@ -191,35 +187,40 @@ def givetfrecommendation(id):
                                   'name': name_arr,
                                   'predicted_rating': prediction_arr,
                                   }
-
+        # convert user food rating to its own dataframe
         rec_for_user = pd.DataFrame(data=recommendation_columns)
         rec_for_user = rec_for_user.sort_values(
             by='predicted_rating', ascending=False)
-        # food_data = db.session.query(Foods).filter(Foods.id.notin_(rated_food))
+        
+        # find food_code that already rated by the user
         user_rating = Ratings.query.filter(Ratings.user_id == id).all()
         rated_food = []
         for rate in user_rating:
             rated_food.append(rate.food_code)
-        # print(rated_food)
+
+        # exclude rated food from the recommendation
         non_rated_recommendation = rec_for_user.loc[(
             ~rec_for_user['food_code'].isin(rated_food))]
+
         recommended_food_code = []
         non_rated_recommendation = non_rated_recommendation.sort_values(
             by='predicted_rating', ascending=False)
+
         print(non_rated_recommendation.head(10))
+
+        # get 10 recommended food_code
         for index, row in non_rated_recommendation.head(10).iterrows():
             recommended_food_code.append(row.food_code)
 
         food_data = db.session.query(Foods).filter(
             Foods.food_code.in_(recommended_food_code)).all()
 
+        # get recommended foods nutrition detail
         arr_json = []
         content = {}
         shuffled_top10 = random.sample(food_data, len(food_data))
-        # shuffled_top10 = food_data
-        for food in shuffled_top10:
 
-            # content = {'id':foods.id,'bruh':22}
+        for food in shuffled_top10:
             content = {'id': food.id, 'food_code': food.food_code, 'name': food.name, 'category': food.category,
                        'calories': food.calories, 'carbs': food.carbs, 'protein': food.protein, 'fat': food.fat, 'fiber': food.fiber, 'sugar': food.sugar,
                        'vitamin_a': food.vitamin_a, 'vitamin_b6': food.vitamin_b6, 'vitamin_b12': food.vitamin_b12, 'vitamin_c': food.vitamin_c, 'vitamin_d': food.vitamin_d,
@@ -227,6 +228,7 @@ def givetfrecommendation(id):
             arr_json.append(content)
             content = {}
 
+        # return recommendation JSON response
         jsonku = {"status": "success",
                   "code": 200,
                   "message": "User Found",
@@ -234,6 +236,7 @@ def givetfrecommendation(id):
                   "recommended_food": arr_json
                   }
         return jsonify(jsonku)
+    # In case user not in DB    
     else:
         jsonku = {"status": "success",
                   "code": 404,
@@ -241,10 +244,13 @@ def givetfrecommendation(id):
                   }
         return jsonify(jsonku)
 
-
+# Content based recommendation using scikit-learn KNN
+# This DF works by finding the n most similar foods based on the nutrition
+# <id> ==> food_code (not food_id! check DB)
 @app.route('/recommendation_fnb/<id>')
 def itemrecommendation(id):
     user_food = Foods.query.filter(Foods.food_code == id).all()
+    # make sure the food exist
     if(user_food):
         selected_food = user_food[0]
         current_food = {
@@ -267,12 +273,15 @@ def itemrecommendation(id):
             "image_url": "{}static/photos/{}.jpg".format(request.host_url,selected_food.food_code)
         }
 
+        # get n most similar foods
         searched_food_code = all_code.index(int(id))
         searched_food_name = food_df.loc[food_df['food_code'] == int(id)].head(
             1).name.tolist()
-        print(searched_food_name)
+
+        # n most similar food_code
         nearest_fnb = food_df.loc[indices[searched_food_code]
                                   ]['food_code'].tolist()
+
         food_data = db.session.query(Foods).filter(
             Foods.food_code.in_(nearest_fnb)).all()
 
@@ -288,6 +297,7 @@ def itemrecommendation(id):
             arr_json.append(content)
             content = {}
 
+        # return content-based recommendation JSON
         jsonku = {"status": "success",
                   "code": 200,
                   "message": "Item Found",
@@ -295,6 +305,7 @@ def itemrecommendation(id):
                   "related_food": arr_json
                   }
         return jsonify(jsonku)
+    #in case of user not found
     else:
         jsonku = {"status": "success",
                   "code": 404,
@@ -303,45 +314,7 @@ def itemrecommendation(id):
         return jsonify(jsonku)
 
 
-@app.route('/testjson/<id>')
-def myjson(id):
-    user_food = Foods.query.filter(Foods.food_code == id).all()
-    # user_food = Ratings.query.filter(Ratings.food_code == id).all()
-    if(user_food):
-        selected_food = user_food[0]
-        current_food = {
-            "food_code": selected_food.food_code,
-            "name": selected_food.name,
-            "category": selected_food.category,
-            "type": selected_food.type,
-            "calories": selected_food.calories,
-            "carbs": selected_food.carbs,
-            "fat": selected_food.fat,
-            "sugar": selected_food.sugar,
-            "fiber": selected_food.fiber,
-            "vitamin_a": selected_food.vitamin_a,
-            "vitamin_b6": selected_food.vitamin_b6,
-            "vitamin_b12": selected_food.vitamin_b12,
-            "vitamin_c": selected_food.vitamin_c,
-            "vitamin_d": selected_food.vitamin_d,
-            "vitamin_e": selected_food.vitamin_e,
-        }
-
-        jsonku = {"status": "success",
-                  "code": 200,
-                  "message": "Item Found",
-                  "food_data": current_food,
-                  "related_food": []
-                  }
-        return jsonify(jsonku)
-    else:
-        jsonku = {"status": "success",
-                  "code": 404,
-                  "message": "Item Not Found"
-                  }
-        return jsonify(jsonku)
-
-
+# endpoint to search food by food keyword
 @app.route('/find_fnb', methods=['GET', 'POST'])
 def find_fnb():
     if request.method == 'POST':
@@ -369,6 +342,7 @@ def find_fnb():
                   }
         return jsonify(jsonku)
 
+# TF Model
 def RecommenderV2(n_users, n_food, n_dim):
     
     # User
@@ -395,6 +369,7 @@ def RecommenderV2(n_users, n_food, n_dim):
     
     return model
 
+# Endpoint to retrain the model and save the new TF & KNN Model
 @app.route('/export_and_train')
 def convert_food():
     # return "Hellow Flask Application"
@@ -527,78 +502,6 @@ def convert_food():
     food_unique = train_rating_df['Food_ID'].nunique()
 
     print('Using tensorflow version:', tf.__version__)
-
-
-    # best_state_val_loss = 0
-    # best_state_end_val_loss = 0
-    # lowest_val_loss = 999999
-    # lowest_end_val_loss = 999999
-    # for i in range(1,100):
-    #     print("------------------ ITERATION NUMBER {} ------------------".format(i))
-    #     model = RecommenderV2(userid_nunique, food_unique, 32)
-    #     X = train_rating_df.drop(['rating'], axis=1)
-    #     y = train_rating_df['rating']
-
-    #     X_train, X_val, y_train, y_val = train_test_split(X, y,
-    #                                                     test_size=.2,
-    #                                                     stratify=y,
-    #                                                     random_state=i)
-    #     # X_train, X_val, y_train, y_val = train_test_split(X, y,
-    #     #                                                 test_size=.2)
-
-    #     model_title = 'TrainedModel/Model {}.h5'.format(datetime.now().strftime("%d-%m-%Y %H-%M-%S"))
-    #     checkpoint = ModelCheckpoint(model_title, monitor='val_loss', verbose=0, save_best_only=True)
-    #     val_loss_cb = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=3)
-    #     print(model_title)
-    #     history = model.fit(x=[X_train['User_ID'], X_train['Food_ID']],
-    #                     y=y_train,
-    #                     batch_size=64,
-    #                     epochs=100,
-    #                     verbose=1,
-    #                     validation_data=([X_val['User_ID'], X_val['Food_ID']], y_val),
-    #                     callbacks=[val_loss_cb,checkpoint])
-
-    #     training_loss2 = history.history['loss']
-    #     test_loss2 = history.history['val_loss']
-    #     i_min_val_loss = min(test_loss2)
-    #     i_end_val_loss = test_loss2[len(test_loss2)-1]
-    #     if(i_min_val_loss<lowest_val_loss):
-    #         best_state_val_loss = i
-    #         lowest_val_loss = i_min_val_loss
-
-    #     if(i_end_val_loss<lowest_end_val_loss):
-    #         best_state_end_val_loss = i
-    #         lowest_end_val_loss = i_end_val_loss
-    #     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')         
-
-    # print("Lower val_loss : {} on random_state : {}".format(lowest_val_loss,best_state_val_loss))
-    # print("Lower end val_loss : {} on random_state : {}".format(lowest_end_val_loss,best_state_end_val_loss))
-
-    # model = RecommenderV2(userid_nunique, food_unique, 32)
-    # X = train_rating_df.drop(['rating'], axis=1)
-    # y = train_rating_df['rating']
-
-    # X_train, X_val, y_train, y_val = train_test_split(X, y,
-    #                                                 test_size=.2,
-    #                                                 stratify=y,
-    #                                                 random_state=87)
-    # # X_train, X_val, y_train, y_val = train_test_split(X, y,
-    # #                                                 test_size=.2)
-
-    # model_title = 'TrainedModel/Model {}.h5'.format(datetime.now().strftime("%d-%m-%Y %H-%M-%S"))
-    # checkpoint = ModelCheckpoint(model_title, monitor='val_loss', verbose=0, save_best_only=True)
-    # val_loss_cb = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=3)
-    # history = model.fit(x=[X_train['User_ID'], X_train['Food_ID']],
-    #                 y=y_train,
-    #                 batch_size=64,
-    #                 epochs=100,
-    #                 verbose=1,
-    #                 validation_data=([X_val['User_ID'], X_val['Food_ID']], y_val),
-    #                 callbacks=[val_loss_cb,checkpoint])
-
-
-    # train_rating_df_title = 'TrainedModel/train_rating_df {}.csv'.format(datetime.now().strftime("%d-%m-%Y %H-%M-%S"))
-    # train_rating_df.to_csv(train_rating_df_title, index=False)
    
     ori_df = pd.read_csv(rated_food_title)
     knn_df = ori_df.copy()
@@ -616,57 +519,6 @@ def convert_food():
     return "DONE"
 
 
-
-
-# @app.route('/delete_non_rated')
-# def deletenorate():
-#     # all_food = pd.read_csv('Exported Food.csv')
-#     all_food = pd.read_csv('Exported Food 07-06-2021 16-35-04.csv')
-#     # rated_food_only = pd.read_csv('Exported Rating.csv')
-#     rated_food_only = pd.read_csv('Exported Rating 07-06-2021 16-35-04.csv')
-#     rated_index_only = rated_food_only['food_code'].unique().tolist()
-#     food_code_not_rated = all_food.loc[(
-#         ~all_food['food_code'].isin(rated_index_only)), 'food_code'].tolist()
-#     # not_rate_fnb = db.session.query(Foods).filter(Foods.food_code.in_(food_code_not_rated)).all()
-#     delete_q = Foods.__table__.delete().where(
-#         Foods.food_code.in_(food_code_not_rated))
-#     db.session.execute(delete_q)
-#     db.session.commit()
-
-#     return "SUCCESS"
-
-
-@app.route('/nowtime')
-def testnow():
-    # PEOPLE_FOLDER = os.path.join(os.getcwd(), 'photos')
-
-    
-
-    # return url_for('static',filename='photos/Almond milk, sweetened, chocolate2.jpg')
-    # return render_template("cobaimg.html")
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'Almond milk, sweetened, chocolate2.jpg')
-    # return render_template("cobaimg.html", user_image = full_filename)
-    # return url_for('static',filename='photos/Almond milk, sweetened, chocolate2.jpg')
-    print(request.host_url)
-    jsonku = {"status": "success",
-                  "code": 200,
-                  "message": "User Found",
-                  "url": "{}static/photos/Almond milk, sweetened, chocolate2.jpg".format(request.host_url)
-            
-                  }
-    return jsonify(jsonku)
-
-# @app.route('/insert_image')
-# def imginsert():
-#     all_food = Foods.query.all()
-#     for food in all_food:
-
-#         # print(str(food.food_code)+'.jpg')
-#         my_data = Food_images(food.id,food.food_code,str(food.food_code)+'.jpg')
-#         db.session.add(my_data)
-#         db.session.commit()
-
-#     return 'SUCCESS'
 
 
 

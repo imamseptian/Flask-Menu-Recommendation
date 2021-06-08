@@ -1,27 +1,27 @@
+# THIS CODE IS FOR CREATING PREDICTED RATING DATAFRAME USING TRAINED TF MODEL
+
 import tensorflow as tf
 import pandas as pd
 import numpy as np
 from tensorflow.keras.models import load_model
 from datetime import datetime
 
-
-
-# rating_csv_title = 'TrainedModel/train_rating_df 05-06-2021 23-40-12.csv'
+# Load Rating DF, Food DF, and trained tf model
 rating_csv_title = 'TrainedModel/train_rating_df 07-06-2021 16-35-09.csv'
 rating = pd.read_csv(rating_csv_title)
-# model_title = 'TrainedModel/Model 05-06-2021 23-40-05.h5'
+
 model_title = 'TrainedModel/Model 07-06-2021 16-35-05.h5'
 model = load_model(model_title)
-# food_csv_title = 'ExportedDB/Exported Rated Food 05-06-2021 23-40-04.csv'
+
 food_csv_title = 'ExportedDB/Exported Rated Food 07-06-2021 16-35-04.csv'
 food_df = pd.read_csv(food_csv_title)
+
 print('Creating Zeros DF')
 zeros_df = pd.DataFrame(0,index=sorted(rating['user_id'].unique()),columns=food_df['food_code'].tolist())
 
+# creating food and user dict
 user_dict = {}
 food_dict = {}
-
-
 for index, row in rating.iterrows():
   if(row['user_id'] not in user_dict):
     user_dict[row['user_id']] = row['User_ID']
@@ -48,5 +48,6 @@ for index, row in zeros_df.iterrows():
   step_loop+=1
   print('Filing Row {} / {}'.format(step_loop,total_user))
 
+# saved predicted df
 tf_rec_csv_title = 'RecommendationCSV/TF Recommendation Index {}.csv'.format(datetime.now().strftime("%d-%m-%Y %H-%M-%S"))
 zeros_df.to_csv(tf_rec_csv_title, index=True)
