@@ -6,3 +6,4 @@ Pillow
 PyMySQL
 scikit-learn
 tensorflow
+gunicorn
