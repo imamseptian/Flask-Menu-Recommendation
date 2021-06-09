@@ -233,7 +233,7 @@ def givetfrecommendation(id):
                   "code": 200,
                   "message": "User Found",
                   "user_data": user_json,
-                  "recommended_food": arr_json
+                  "recommended_fnb": arr_json
                   }
         return jsonify(jsonku)
     # In case user not in DB    
@@ -245,7 +245,7 @@ def givetfrecommendation(id):
         return jsonify(jsonku)
 
 # Content based recommendation using scikit-learn KNN
-# This DF works by finding the n most similar foods based on the nutrition
+# This DF works by finding the n most similar FNB based on the nutrition
 # <id> ==> food_code (not food_id! check DB)
 @app.route('/recommendation_fnb/<id>')
 def itemrecommendation(id):
@@ -301,8 +301,8 @@ def itemrecommendation(id):
         jsonku = {"status": "success",
                   "code": 200,
                   "message": "Item Found",
-                  "food_data": current_food,
-                  "related_food": arr_json
+                  "detail_fnb": current_food,
+                  "related_fnb": arr_json
                   }
         return jsonify(jsonku)
     #in case of user not found
@@ -314,7 +314,7 @@ def itemrecommendation(id):
         return jsonify(jsonku)
 
 
-# endpoint to search food by food keyword
+# endpoint to search FNB by keyword
 @app.route('/find_fnb', methods=['GET', 'POST'])
 def find_fnb():
     if request.method == 'POST':
@@ -322,9 +322,10 @@ def find_fnb():
         sql = sqlalchemy.text(
             "SELECT * FROM foods WHERE name LIKE '%{}%';".format(request_data['keyword']))
         all_data = db.engine.execute(sql)
-
+        
         arr_json = []
         content = {}
+        num_food = 0
         for food in all_data:
 
             # content = {'id':foods.id,'bruh':22}
@@ -334,13 +335,22 @@ def find_fnb():
                        'vitamin_e': food.vitamin_e, "image_url": "{}static/photos/{}.jpg".format(request.host_url,food.food_code)}
             arr_json.append(content)
             content = {}
-        print(arr_json)
-        jsonku = {"status": "success",
-                  "code": 200,
-                  "message": "Item Found",
-                  "food_data": arr_json
-                  }
-        return jsonify(jsonku)
+            num_food+=1
+        print(num_food)
+        if(num_food>0):
+            jsonku = {"status": "success",
+                    "code": 200,
+                    "message": "Item Found",
+                    "fnb_data": arr_json
+                    }
+            return jsonify(jsonku)
+        else:
+            jsonku = {"status": "success",
+                    "code": 200,
+                    "message": "Item Not Found",
+                    "fnb_data": arr_json
+                    }
+            return jsonify(jsonku)
 
 # TF Model
 def RecommenderV2(n_users, n_food, n_dim):
@@ -351,18 +361,17 @@ def RecommenderV2(n_users, n_food, n_dim):
     U = Flatten()(U)
     
     # food
-    movie = Input(shape=(1,))
-    M = Embedding(n_food, n_dim)(movie)
+    food = Input(shape=(1,))
+    M = Embedding(n_food, n_dim)(food)
     M = Flatten()(M)
     
-    # Gabungkan disini
     merged_vector = concatenate([U, M])
     dense_1 = Dense(128, activation='relu')(merged_vector)
     dense_2 = Dense(64, activation='relu')(dense_1)
-    # dropout = Dropout(0.5)(dense_1)
+
     final = Dense(1)(dense_2)
     
-    model = Model(inputs=[user, movie], outputs=final)
+    model = Model(inputs=[user, food], outputs=final)
     
     model.compile(optimizer=Adam(0.001),
                   loss='mean_squared_error')
@@ -517,9 +526,6 @@ def convert_food():
 
 
     return "DONE"
-
-
-
 
 
 if __name__ == "__main__":
